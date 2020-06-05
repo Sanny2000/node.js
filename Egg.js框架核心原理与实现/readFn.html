@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        const fs = require("fs");
+        //不用匿名函数
+        function readFn(err, data) {
+            console.log(data.toString);
+        }
+        fs.readFile("mock.txt", readFn);
+        //事件形式
+        let e2 = new ChainEvente();
+        e2.add("readFn", readFn);
+        fs.readFile("mock.txt", (err, data) => {
+            e2.emit("readFn", err, data);
+        });
+    </script>
+</body>
+
+</html>

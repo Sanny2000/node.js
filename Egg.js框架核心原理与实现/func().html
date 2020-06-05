@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        async function func() {
+            return2;
+        }
+        func().then(console.log);
+        const getPosts = () =>
+            new Promise((resolve, reject) => {
+                resolve([{
+                    name: "a"
+                }, {
+                    name: "b"
+                }, {
+                    name: "c"
+                }, {
+                    name: "d"
+                }]);
+            });
+        async function func2() {
+            try {
+                const number = await func();
+                const posts = await getPosts();
+                console.log(number);
+                console.log(posts);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        func2();
+    </script>
+</body>
+
+</html>
