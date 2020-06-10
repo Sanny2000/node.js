@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        const fs = require("fs");
+        const readFilePromise = filename =>
+            new Promise((resolve, reject) => {
+                fs.readFile(filename, (err, data) => {
+                    if (err) {
+                        reject(err)
+                        reject(err);
+                        return;
+                    }
+                    resolve(data);
+                });
+            });
+        async function main() {
+            const txt = await readFilePromise("mock.txt");
+            console.log(txt.toString());
+        }
+        main();
+    </script>
+</body>
+
+</html>
