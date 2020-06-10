@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        function creat(fn) {
+            let ret = false;
+            return ({
+                next,
+                complete,
+                error
+            }) => {
+                function nextFn(...args) {
+                    if (ret) {
+                        return;
+                    }
+                    next(...args);
+                }
+
+                function completeFn(...args) {
+                    complete(...args);
+                    ret = true;
+                }
+
+                function errorFn(...args) {
+                    error(...args);
+                }
+                fn({
+                    next: nextFn,
+                    complete: completeFn,
+                    error: errorFn
+                });
+                return () => (ret = true);
+            };
+        }
+        let observerable = creat(observer => {
+            setTimeout(() => {
+                observer.next(1);
+            }, 1000);
+            observer.next(2);
+            observer.complete(3);
+        });
+        const subject = {
+            next: value => {
+                console.log(value);
+            },
+            complete: console.log,
+            error: console.log
+        };
+        let unsubscribe = observerable(subject);
+    </script>
+</body>
+
+</html>

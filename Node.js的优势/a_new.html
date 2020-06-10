@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        async function a_new(ctx) {
+            console.log(1);
+            const hello = await Promise.resolve("hello node.js");
+            console.log(hello);
+            await b_new(ctx);
+            console.log("a end");
+        }
+        async function b_new(ctx) {
+            console.log(2);
+            const hello = await Promise.resolve("hello node.js");
+            console.log(hello);
+            console.log("b end");
+        }
+        a_new({});
+    </script>
+</body>
+
+</html>
